@@ -1,0 +1,15 @@
+{
+  "name": "api-rocketmovie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "./src/server.js"
+  },
+  "keywords": [],
+  "author": "Lucas Gabryel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
