@@ -1,3 +1,4 @@
+const { hash } = require('bcryptjs'); //importa a biblioteca de criptografia de senhas
 const AppError = require('../utils/AppError');
 
 const sqliteConnection = require('../database/sqlite');
@@ -13,7 +14,9 @@ class UsersController {
             throw new AppError('Este email já está em uso.');
         }
 
-        await database.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, password]); // caso não esteja em uso, segue o código. inicia uma função promessa (await), de ir no bd e inserir dentro de users o name, email e password
+        const hashedPassword = await hash(password, 8);
+
+        await database.run('INSERT INTO users (name, email, password) VALUES (?, ?, ?)', [name, email, hashedPassword]); // caso não esteja em uso, segue o código. inicia uma função promessa (await), de ir no bd e inserir dentro de users o name, email e password
 
         return response.status(201).json(); // vai retornar um status de 201, significando que deu tudo certo e o user foi criado, retorna tbm um json vazio
 
